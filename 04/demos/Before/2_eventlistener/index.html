@@ -191,9 +191,9 @@
         document.querySelector("footer div").classList.remove("font-xxlarge");
         document.querySelector("footer div").classList.add("font-large");
 
-
+        // Refactor - Implementation of event listener
         let btn = document.querySelector("button");
-        btn.onclick = function() { addToCart(); };
+        btn.addEventListener('click', addToCart);
 
         function addToCart() {
             let spanTickets = document.getElementById("spanTickets");
