@@ -215,10 +215,13 @@
 
         //Implementation: 
 
-        //  I start by accessing all of the buttons on my page. Now, I happen to know that document.getElementsByTagName works this time, because the only buttons on the page are those removeFromCart buttons. If you have more buttons, you probably should use document.querySelectorAll and then have a more specific selector. But here, all buttons is exactly what I want, and then I would like to iterate over them, like this forEach. 
-        
+        // 1.  I start by accessing all of the buttons on my page. Now, I happen to know that document.getElementsByTagName works this time, because the only buttons on the page are those removeFromCart buttons. If you have more buttons, you probably should use document.querySelectorAll and then have a more specific selector. But here, all buttons is exactly what I want, and then I would like to iterate over them, like this forEach. 
+
         // However, there's a catch. I can't forEach over the data returned by getElementsByTagName, but using the spread operator, I can do that. 
-        document.getElementsByTagName('button)').forEach()
+        // So I iterate over all of the buttons
+        [...document.getElementsByTagName('button)')].forEach(
+            // 2. and for each button, I just do a button.addEventListener, and the event handling code is in the function, removeItemFromCart
+            button => button.addEventListener('cllick', removeItemFromCart));
 
         function removeFromCart(idx) {
             let items = document.querySelectorAll("#carttable table tbody tr");
