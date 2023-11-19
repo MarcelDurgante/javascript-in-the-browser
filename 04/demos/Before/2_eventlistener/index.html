@@ -161,6 +161,31 @@
         </footer>
     </div>
     <script>
+        /* Adding an Event Listener: 
+        
+        To add an event listener to a DOM element in JavaScript:
+
+            Select a DOM Element: Use methods like document.getElementById or other DOM selection methods.
+            Call addEventListener Method: Use this method on the selected DOM element.
+            Provide Two Arguments:
+                Event Name: Such as "click" for mouse clicks or taps on an element.
+                Event Handler Function: The code that executes when the event occurs. This function can receive an event object, often denoted as e, which provides details about the event.
+                Example:
+
+                    // Selecting a button element
+
+                        var button = document.getElementById("myButton");
+
+                    // Adding a click event listener
+
+                    button.addEventListener("click", function(e) {
+                        // Event handling code here
+                        console.log("Button clicked!");
+                    });
+                    
+                In this example, a click event listener is added to a button with the ID "myButton". When the button is clicked, it logs "Button clicked!" to the console.
+        
+        */
         document.querySelector("footer div").childNodes[1].textContent = 
             new Date().getFullYear();
         document.querySelector("footer div").classList.remove("font-xxlarge");
