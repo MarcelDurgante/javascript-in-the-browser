@@ -223,6 +223,12 @@
             // 2. and for each button, I just do a button.addEventListener, and the event handling code is in the function, removeItemFromCart
             button => button.addEventListener('cllick', removeItemFromCart));
 
+        function removeItemFromCart(e) {
+            // 3.  since this is an event handling function, it automatically receives event arguments "e". And then I try to access the table row with "e.target", because 'target' gives us the element where the event was triggered.
+            //So if I clicked on the button, that's the button. And in case it's the button, ".parentNode" --> is the table cell and ".parentNode" again --> is the table row.
+            let row = e.target.parentNode.parentNode;
+        }
+
         function removeFromCart(idx) {
             let items = document.querySelectorAll("#carttable table tbody tr");
             if (idx < items.length) {
