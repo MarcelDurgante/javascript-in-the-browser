@@ -195,6 +195,11 @@
                 items[idx].remove(); //  And then let's start counting from 0, as arrays do. So say we have five different items in the shopping cart, the index goes from 0 through 4, so if the idx we provide is smaller than items.length, then we can happily remove it. So we access items of idx, because we now can be safe to assume it exists, then we can just remove it. We don't know yet how to tie that code to that 'remove from cart' buttons, but we can still use the browser console.
             }
         }
+        /* output: 
+        
+        Reload the page so we get the latest code, and then in the console, I just call removeFromCart, and then how about we just remove the second item here, so the index is 1. I just call removeFromCart, and as you can see, that entry is gone, so we can now remove elements from our shopping cart, or since we are talking about the DOM, we can remove DOM nodes from the DOM tree.
+        
+        */
     </script>
 </body>
 
