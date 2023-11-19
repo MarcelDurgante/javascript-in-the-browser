@@ -183,11 +183,25 @@
         There are two ways how I can do this using the Netscape‑inspired API
         
         */
+        // The other option would be that I'm setting the onClick property. 
 
         document.querySelector("footer div").childNodes[1].textContent =
             new Date().getFullYear();
         document.querySelector("footer div").classList.remove("font-xxlarge");
         document.querySelector("footer div").classList.add("font-large");
+
+        // So how about we start by selecting the first button, and I'm just looking for a button element. I have five button elements on the page, at least currently. 
+        let btn = document.querySelector('button'); // The querySelector only returns the first one, so I will be using that. 
+
+        // And then I could use that btn and set its onclick property to addToCart. 
+        btn.onclick = addToCart; // And this time I'm setting a property, so I cannot run code here, or should not run code here, instead, I just reference or point to that function, so that would work as well.
+
+        function addToCart() {
+            let spanTickets = document.getElementById("spanTickets");
+            let count = parseInt(spanTickets.textContent) ?? 0;
+            spanTickets.textContent = count + 1;
+        }
+
     </script>
 </body>
 
