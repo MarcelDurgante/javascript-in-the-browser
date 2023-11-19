@@ -176,52 +176,19 @@
         </footer>
     </div>
     <script>
-        /* Adding an Event Listener: 
-        
-        To add an event listener to a DOM element in JavaScript:
-
-            Select a DOM Element: Use methods like document.getElementById or other DOM selection methods.
-            Call addEventListener Method: Use this method on the selected DOM element.
-            Provide Two Arguments:
-                Event Name: Such as "click" for mouse clicks or taps on an element.
-                Event Handler Function: The code that executes when the event occurs. This function can receive an event object, often denoted as e, which provides details about the event.
-                Example:
-
-                    // Selecting a button element
-
-                        var button = document.getElementById("myButton");
-
-                    // Adding a click event listener
-
-                    button.addEventListener("click", function(e) {
-                        // Event handling code here
-                        console.log("Button clicked!");
-                    });
-                    
-                In this example, a click event listener is added to a button with the ID "myButton". When the button is clicked, it logs "Button clicked!" to the console.
-        
-        */
         document.querySelector("footer div").childNodes[1].textContent =
             new Date().getFullYear();
         document.querySelector("footer div").classList.remove("font-xxlarge");
         document.querySelector("footer div").classList.add("font-large");
 
-        // Refactor - Implementation of event listener
         let btn = document.querySelector("button");
 
-        // There is an extra argument to the addEventListener method, and historically, there only was an option to provide a Boolean value. Modern browsers also allow a hash table with some settings, and the most useful one, at least in my opinion, is once, because once basically says this event listener works once, and once the event occurs, so for instance, once a user clicks on a DOM element, the code runs and then the event listener is removed again. So let's quickly refactor this. I think this approach is much better. So we set once to true, and then we can remove the removeEventListener call, which also makes the addToCart method or addToCart function a little bit more independent on the addEventListener call.
-        btn.addEventListener('click', addToCart, { once: true }); // output: click once and if you click twice it does not work because the event listener is removed.
+       btn.addEventListener('click', addToCart, { once: true }); // output: click once and if you click twice it does not work because the event listener is removed.
 
         function addToCart() {
             let spanTickets = document.getElementById("spanTickets");
             let count = parseInt(spanTickets.textContent) ?? 0;
             spanTickets.textContent = count + 1;
-
-            // one thing we can do when adding event listeners like this, we can also remove them later. If you have several event listeners, we can remove individual ones. However, that does not work easily with anonymous functions, but if we have a name function like here, we could do it. I show you a very simple implementation that only makes sense if there's only one place where you're using this function. For the sake of simplicity, I think this approach is viable here. It will not be viable if you are using the addToCart function on several places on the page, which you would usually do. So we can also do a removeEventListener, and this method also expects the name of the event and then the listener. 
-
-            // btn.removeEventListener("click", addToCart);
-
-            // output: So I hit the button once, and we now have one ticket in our shopping cart, and I hit it again, and nothing happens. Why? Because we removed the event listener.
         }
     </script>
 </body>
