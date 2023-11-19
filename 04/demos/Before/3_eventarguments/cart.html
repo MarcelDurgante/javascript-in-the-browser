@@ -189,7 +189,6 @@
         }
 
         function removeFromCart(idx) {
-            console.log(idx);
             let item = document.querySelector(`#carttable table tbody tr[data-idx='${idx}']`);
             if (item) {
                 item.remove();
