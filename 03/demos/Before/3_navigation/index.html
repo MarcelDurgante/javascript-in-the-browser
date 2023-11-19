@@ -161,7 +161,7 @@
         </footer>
     </div>
     <script>
-        document.querySelector("footer div").childNodes[1].textContent = // could use innerText or textContent. So that would work really well here, and would also be a bit more efficient than using innerHTML. What will not work is this approach. So childNodes[1] gives us the span element with the copyright‑year, so we cannot do firstChild and then nodeValue. Why? Because that span element does not have a firstChild yet. There is no text in it yet. If there was a placeholder, like xxxx, then we would have a first Child, then we could set the nodeValue, but at the moment we don't have it yet. So we could either create a new text node, we will see that shortly, or we just revert and use textContent.
+        document.querySelector("footer div").childNodes[1].textContent = 
             new Date().getFullYear();
     </script>
   </body>
