@@ -29,23 +29,11 @@
        Additionally, mousedown and mouseup are used to detect the pressing and releasing of a mouse button, and a click event is a combination of these two on the same element.
         
         */
-       /* Implementation: 
-       
-       Let's use those mousemove events to show you an effect on the Globoticket main page and also show you one more trick. 
-       
-       At the bottom, we spot the addToCart icon. Basically it's a span, and then it references a Bootstrap icons class here, bi‑cart‑plus‑fill. So how about we select that? So we could do, let's say, btnCart, and then document.querySelector, and the selector would be span, but then what? 
-       
-       We can't check for whether the class property is set to something specific, we need to look for an entry in the list of classes, and that's what can be done with that syntax here. So we have the tilde and then the equal sign, and then we just look for bi‑cart‑plus‑fill. That should give us our cart button, and now we can add event listeners, because we need two. 
-       
-       So first of all, we'd like to listen for the mouseenter event, and if the mouse pointer hovers over the cart, we would just like to change the visual appearance. 
-       
-       Now, I'm absolutely aware that this can be done with CSS only, but I just wanted to show you the mouseenter and later mouseleave events in action, so let's just do that. 
-       
-       So we just access the icon and then it's classList, and then we just add an extra class. I've already prepared one, it's called cart‑highlight, which basically changes the color of that specific icon, and that's it. 
-       
-       And then we do the same thing again for mouseleave. Let me just copy and paste that just to save some time. So once the mouse leaves the icon again, we remove the class we have previously added, and that's basically it. 
-       
-       */
+        /* Implementation: 
+        
+        Let's use those mousemove events to show you an effect on the Globoticket main page and also show you one more trick. 
+          
+        */
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelector("footer div").childNodes[1].textContent =
                 new Date().getFullYear();
@@ -78,6 +66,19 @@
                         e.preventDefault();
                     }
                 }
+            );
+            // 1. At the bottom, we spot the addToCart icon. Basically it's a span, and then it references a Bootstrap icons class here, bi‑cart‑plus‑fill. So how about we select that? So we could do, let's say, btnCart, and then document.querySelector, and the selector would be span, but then what? 
+
+            // 2. We can't check for whether the class property is set to something specific, we need to look for an entry in the list of classes, and that's what can be done with that syntax here. So we have the tilde and then the equal sign, and then we just look for bi‑cart‑plus‑fill. That should give us our cart button.
+            let btnCart = document.querySelector("span[class~='bi-cart-plus-fill']");
+            // 3. and now we can add event listeners, because we need two.
+            btnCart.addEventListener(
+                "mouseenter", // 4.  So first of all, we'd like to listen for the mouseenter event, and if the mouse pointer hovers over the cart, we would just like to change the visual appearance. Now, I'm absolutely aware that this can be done with CSS only, but I just wanted to show you the mouseenter and later mouseleave events in action, so let's just do that. 
+                (e) => e.target.classList.add("cart-highlight") // 5. So we just access the icon and then it's classList, and then we just add an extra class. I've already prepared one, it's called cart‑highlight, which basically changes the color of that specific icon, and that's it. 
+            );
+            btnCart.addEventListener( // 6. And then we do the same thing again for mouseleave. 
+                "mouseleave", // So once the mouse leaves the icon again, 
+                (e) => e.target.classList.remove("cart-highlight") // 7. we remove the class we have previously added, and that's basically it.
             );
         });
     </script>
