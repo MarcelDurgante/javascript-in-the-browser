@@ -161,6 +161,16 @@
         </footer>
     </div>
     <script>
+        /* Deleting Dom elements explanation:
+        
+        Removing DOM elements in modern web development is considerably straightforward compared to older methods. Traditionally, developers needed to directly inform a parent node in the DOM (Document Object Model) to remove a child node. This involved accessing the parent node and then specifying which child node to remove. This approach, while logical given the hierarchical nature of the DOM, was not very intuitive or efficient.
+
+            let node = document.querySelector("...");
+            node.parentNode.removeChild(node);
+
+        In current practices, a more approachable API, however this process has been significantly simplified, what they did is they added a couple of helper methods gets rid of the DOM node (removes the DOM node from the DOM tree), and for removing DOM elements, it's just called remove You can now directly remove an element without the need to interact with its parent node. This is commonly done using methods like document.querySelector() to select the desired element and then applying the .remove() method to delete it. This method is not only more straightforward but also aligns better with modern web development practices that emphasize efficiency and simplicity in DOM manipulation.
+                
+        */
         document.querySelector("footer div").childNodes[1].textContent = 
             new Date().getFullYear();
         document.querySelector("footer div").classList.remove("font-xxlarge");
