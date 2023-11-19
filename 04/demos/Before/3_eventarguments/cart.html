@@ -142,7 +142,6 @@
                                         class="bi bi-cart-x-fill text-white font-large"></span></button>
                             </td>
                         </tr>
-                        <!-- for each table row, I have added an attribute called data‑idx, and I have written the table row index in it, so values from 0 through 4 -->
                         <tr class="align-middle" data-idx="4">
                             <td>
                                 <img class="img-fluid max-100"
@@ -177,84 +176,23 @@
         </footer>
     </div>
     <script>
-        /* Event Arguments - first thoughts and steps: 
-        
-         We might also be interested in the element where that event was fired or triggered. Just imagine you have five buttons, you have the same event handler for all of them, but of course, you have to find out which of these five buttons has been clicked, and that's what you can find by using the target property of that event argument parameter. 
-         
-         That gives you the DOM element, and then you can query it and, for instance, have a look at some attributes of it or its tag name. Depending on the event, there are also event‑specific properties. 
-         
-         For instance, if you have keyboard events, you might be interested in which key was pressed. If you have a mouse event, you might be interested in the coordinates of, say, the click, so where was the mouse pointer or where exactly did the user tap on the screen. 
-         
-         Here on the shopping cart page, we already have the removeFromCart function from earlier, which expects the index of the table row to remove when removing an item from the cart. And the table rows in our example go from 0 through 4, so we could add an event listener to the removeFromCart button in the first row, and then call removeFromCart of 0, and for the next row, remove from card of 1, etc, etc, 
-         
-         But I'd like to solve this with just one event handler. 
-         
-         In order to do that, there are different strategies and approaches, and the one I'm showing you looks a bit complicated at first, but it also gives me the opportunity to point out some other things to watch out for when doing event handling with the DOM. 
-         
-         I've already prepared the HTML a little bit for our endeavors. So for each table row, I have added an attribute called data‑idx, and I have written the table row index in it, so values from 0 through 4. 
-
-         Then if we look at the HTML hierarchy, if we are at the button with the removeFromCart icon...
-
-                <button type="button" class="btn btn-primary btn-primary-themed btn-md font-upper"><span class="bi bi-cart-x-fill text-white font-large"></span></button>
-         
-        ...and go up once, we reach the table cell...
-
-                <td class="max-50">
-        
-        ...and if we go up once more, we reach the table row, where we can access the data‑idx property.
-        
-                <tr class="align-middle" data-idx="4">
-
-       However, it could be that we do not really hit the button, we hit the text on the button, the icon, the removeFromCart icon to be exact. 
-       
-                <span class="bi bi-cart-x-fill text-white font-large">
-
-       In that case, we have to go up three times, once to reach the button, once more to reach the table cell, and a third time to reach the table row. That's pretty important, and why that is the case and why we could hit both of those HTML elements is something that we'll cover in a bit, but this is all we need to know.
-        
-        */
-
-        //Implementation: 
-
-        // 1.  I start by accessing all of the buttons on my page. Now, I happen to know that document.getElementsByTagName works this time, because the only buttons on the page are those removeFromCart buttons. If you have more buttons, you probably should use document.querySelectorAll and then have a more specific selector. But here, all buttons is exactly what I want, and then I would like to iterate over them, like this forEach. 
-
-        // However, there's a catch. I can't forEach over the data returned by getElementsByTagName, but using the spread operator, I can do that. 
-        // So I iterate over all of the buttons
         [...document.getElementsByTagName('button')].forEach(
-            // 2. and for each button, I just do a button.addEventListener, and the event handling code is in the function, removeItemFromCart
             button => button.addEventListener('click', removeItemFromCart));
 
         function removeItemFromCart(e) {
-            // 3.  since this is an event handling function, it automatically receives event arguments "e". And then I try to access the table row with "e.target", because 'target' gives us the element where the event was triggered.
-            //So if I clicked on the button, that's the button. And in case it's the button, ".parentNode" --> is the table cell and ".parentNode" again --> is the table row.
             let row = e.target.parentNode.parentNode;
-            console.log(row);
-
-            // 4.  If I clicked on the icon, however, that's not the table row, it's the table cell, so I have to go up once more. 
-
-            // So I take a look at the 'tagName' property. 
-
-            //The tagName property of a DOM element is the HTML tag name in all uppercase. So if that's not TR, if I'm not in a table row...
             if (row.tagName !== 'TR') {
-                // 5. then I just say row = row.parentNode, going up once again
                 row = row.parentNode;
             }
-            // 6. and now I can read out the data‑idx attribute, 
             let idx = row.getAttribute('data-idx');
-            // 7. call removeFromCart that index.
             removeFromCart(idx);
         }
 
-        // That works relatively well. Of course, I could cast the attributes to an integer first, but still I have to change the removeFromCart function. 
-
-        // Why? Because look at the implementation. We iterate over all table rows and then basically count which one we want. That works well until we have removed a row, because that changes the numbering, and therefore we need a different strategy. 
-
-        //  So how about this? 
         function removeFromCart(idx) {
             console.log(idx);
-            // 1. We use querySelector instead of querySelectorAll because we are just reading out one item
-            let item = document.querySelector(`#carttable table tbody tr[data-idx='${idx}']`); // 2. and in order to do that, I am changing the selector a little bit. So I am not interested in just all of the table rows, but just in those table rows or in that table row, to be exact, where data‑idx has a value of, well, and that's what's in the idx variable
-            if (item) { // 3. And then if that item exists
-                item.remove(); // then I remove it
+            let item = document.querySelector(`#carttable table tbody tr[data-idx='${idx}']`);
+            if (item) {
+                item.remove();
             }
         }
     </script>
