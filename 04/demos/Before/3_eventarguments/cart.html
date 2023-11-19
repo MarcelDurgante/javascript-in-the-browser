@@ -242,10 +242,16 @@
             removeFromCart(idx);
         }
 
+        // That works relatively well. Of course, I could cast the attributes to an integer first, but still I have to change the removeFromCart function. 
+
+        // Why? Because look at the implementation. We iterate over all table rows and then basically count which one we want. That works well until we have removed a row, because that changes the numbering, and therefore we need a different strategy. 
+
+        //  So how about this? 
         function removeFromCart(idx) {
-            let items = document.querySelectorAll("#carttable table tbody tr");
-            if (idx < items.length) {
-                items[idx].remove();
+            // 1. We use querySelector instead of querySelectorAll because we are just reading out one item
+            let item = document.querySelector(`#carttable table tbody tr[data-${idx}]`); // 2. and in order to do that, I am changing the selector a little bit. So I am not interested in just all of the table rows, but just in those table rows or in that table row, to be exact, where data‑idx has a value of, well, and that's what's in the idx variable
+            if (item) { // 3. And then if that item exists
+                item.remove(); // then I remove it
             }
         }
     </script>
