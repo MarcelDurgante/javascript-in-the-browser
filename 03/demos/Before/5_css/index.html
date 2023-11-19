@@ -171,6 +171,12 @@
             new Date().getFullYear();
         document.querySelector("footer div").classList.remove("font-xxlarge"); //  access the classList and then remove font‑xxlarge. That works well, however, in the next step, I would also like to add another class, I've prepared one, font‑large, so that the font is a little bit large, but not extra, extra large. Remove, however, returns void, so it's not chainable, therefore, I can't change several things at once removing and adding, therefore...
         document.querySelector("footer div").classList.add("font-large"); // I need to do copy/paste, call add, and then use font‑large here. I remove one class and add another.
+
+        /* output: 
+        
+        Note the font size of the copyright line, and then I reload because we've saved our changes, and font size now is smaller, courtesy of JavaScript code.
+        
+        */
     </script>
   </body>
 </html>
