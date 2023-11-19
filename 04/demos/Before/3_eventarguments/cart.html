@@ -177,6 +177,24 @@
          In order to do that, there are different strategies and approaches, and the one I'm showing you looks a bit complicated at first, but it also gives me the opportunity to point out some other things to watch out for when doing event handling with the DOM. 
          
          I've already prepared the HTML a little bit for our endeavors. So for each table row, I have added an attribute called data‑idx, and I have written the table row index in it, so values from 0 through 4. 
+
+         Then if we look at the HTML hierarchy, if we are at the button with the removeFromCart icon...
+
+                <button type="button" class="btn btn-primary btn-primary-themed btn-md font-upper"><span class="bi bi-cart-x-fill text-white font-large"></span></button>
+         
+        ...and go up once, we reach the table cell...
+
+                <td class="max-50">
+        
+        ...and if we go up once more, we reach the table row, where we can access the data‑idx property.
+        
+                <tr class="align-middle" data-idx="4">
+
+       However, it could be that we do not really hit the button, we hit the text on the button, the icon, the removeFromCart icon to be exact. 
+       
+                <span class="bi bi-cart-x-fill text-white font-large">
+
+       In that case, we have to go up three times, once to reach the button, once more to reach the table cell, and a third time to reach the table row. That's pretty important, and why that is the case and why we could hit both of those HTML elements is something that we'll cover in a bit, but this is all we need to know.
         
         */
         function removeFromCart(idx) {
