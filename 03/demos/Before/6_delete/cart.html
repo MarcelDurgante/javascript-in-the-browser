@@ -176,30 +176,14 @@
         </footer>
     </div>
     <script>
-        /* Deleting Dom elements explanation:
-        
-        Removing DOM elements in modern web development is considerably straightforward compared to older methods. Traditionally, developers needed to directly inform a parent node in the DOM (Document Object Model) to remove a child node. This involved accessing the parent node and then specifying which child node to remove. This approach, while logical given the hierarchical nature of the DOM, was not very intuitive or efficient.
-
-            let node = document.querySelector("...");
-            node.parentNode.removeChild(node);
-
-        In current practices, a more approachable API, however this process has been significantly simplified, what they did is they added a couple of helper methods gets rid of the DOM node (removes the DOM node from the DOM tree), and for removing DOM elements, it's just called remove You can now directly remove an element without the need to interact with its parent node. This is commonly done using methods like document.querySelector() to select the desired element and then applying the .remove() method to delete it. This method is not only more straightforward but also aligns better with modern web development practices that emphasize efficiency and simplicity in DOM manipulation.
-                
-        */
         document.querySelector("footer div").childNodes[1].textContent =
             new Date().getFullYear();
-        // So the shopping cart has a couple of items, and also nonfunctional 'remove from this cart' buttons, however, we could use JavaScript to actually get rid of some of those items. Here is the markup. The details are not that interesting, however, eventually we'll find that there is a development with the id of carttable, so it contains the table with the shopping cart items. We have the table indeed here, and then further down below a tbody element, and within that tbody element, each tr table row is one item of the shopping cart. 
-        function removeFromCart(idx) { //  implement a helper function, so removeFromCart, and then as an argument, the index of the row
-            let items = document.querySelectorAll("#carttable table tbody tr"); //, because where are the shopping cart items? We do a querySelectorAll this time, so we are interested in a couple of elements, and we had carttable as the entry point, and then we had a table, and then we had tbody, and then we had rows within tbody. So this gives us all of the cart items, so how about we call this items. 
+        function removeFromCart(idx) {
+            let items = document.querySelectorAll("#carttable table tbody tr");
             if (idx < items.length) {
-                items[idx].remove(); //  And then let's start counting from 0, as arrays do. So say we have five different items in the shopping cart, the index goes from 0 through 4, so if the idx we provide is smaller than items.length, then we can happily remove it. So we access items of idx, because we now can be safe to assume it exists, then we can just remove it. We don't know yet how to tie that code to that 'remove from cart' buttons, but we can still use the browser console.
+                items[idx].remove();
             }
         }
-        /* output: 
-        
-        Reload the page so we get the latest code, and then in the console, I just call removeFromCart, and then how about we just remove the second item here, so the index is 1. I just call removeFromCart, and as you can see, that entry is gone, so we can now remove elements from our shopping cart, or since we are talking about the DOM, we can remove DOM nodes from the DOM tree.
-        
-        */
     </script>
 </body>
 
