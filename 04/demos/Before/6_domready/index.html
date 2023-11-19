@@ -11,37 +11,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Globoticket</title>
-    <!-- Waiting until the DOM is ready:
-        
-        1. So far, our code has been put at the very bottom of the page, because then we know the page has been rendered, the DOM should be ready, so we can do that. However, now that we know how event handling works, we have better approaches to use, and I will show you how. Let's take the whole script block, and then paste it here in the head block. 
-
-        2. Then I reload the page in the browser, but first I open up the console. So reload, and, oh, it doesn't work. Well, there's some dummy data here, but all of the event handling code is not in effect because we were applying it before the DOM has been fully rendered. For instance, the footer does not show the current year.
-    -->
     <script>
-        // One event that comes in handy here is the load event. We can set up an event listener, so how about this? Let's import not document, but window, and then addEventListener, because load is a window event, not a document event, and that will become important in a minute. 
-
-        //  So the event name is load and the code we would like to run is, well, basically this whole code here in between the <scrip> tags. 
-        // Now the JavaScript code only runs once while the page has been loaded, whatever that means. 
-        // window.addEventListener("load", () => {
-
-        // In order to be able to show you that, I go to the Network tab and add some throttling, so how about Fast 3G. So it takes a while until everything has been loaded, and now let's give it a try. 
-
-        // So I reload the page, and you see, ah, at first the font is missing, now the font is there, but the copyright year is still not there. And slowly the images are loaded. It takes a while, and once the images are fully there and all of the other resources on the page, CSS, etc, etc, then the code runs. 
-
-        //  So the load event is fired once the full page is there. In some cases, that's what we want. 
-
-        //  However, in our case, we are not interested in all of the images being there, we would like that the functionality, adding elements to the cart, etc, works as soon as possible, and also that the copyright year appears as quickly as possible. 
-
-        // And for that, that the DOM is there independent of images, style sheets, and other external resources, for that we have a specific event, and that's called DOMContentLoaded.  We can use document.addEventListener for that.  
-
-        /* output: 
-        
-        And now back in the browser, we can witness the following thing, throttling is still activated. I reload, and you see that immediately the copyright year is there even though the images are still being loaded. 
-        
-        So DOMContentLoaded is probably the event you'd like to use for all of your DOM setup JavaScript code. 
-        
-        */
-
         document.addEventListener("DOMContentLoaded", () => {
             document.querySelector("footer div").childNodes[1].textContent =
                 new Date().getFullYear();
@@ -57,12 +27,12 @@
             function getCartItemCount() {
                 let spanTickets = document.getElementById("spanTickets");
                 return parseInt(spanTickets.textContent) ?? 0;
-            }
+            };
 
             function addToCart() {
                 let count = getCartItemCount();
                 spanTickets.textContent = count + 1;
-            }
+            };
 
             document.querySelector("a[href='./cart.html']").addEventListener(
                 "click",
@@ -73,7 +43,7 @@
                         e.preventDefault();
                     }
                 }
-            )
+            );
         });
     </script>
 </head>
