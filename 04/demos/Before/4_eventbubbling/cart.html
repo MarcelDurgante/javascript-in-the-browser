@@ -176,113 +176,25 @@
         </footer>
     </div>
     <script>
-        /* Event bubbling first thoughts: 
-            
-        HTML Hierarchy and Event Handling: In HTML, the hierarchical structure is crucial for event handling. This is because events in the browser default to a process called event bubbling.
-    
-        Event Bubbling Explained: When an event occurs, it starts at the most specific element (the one directly interacted with) and then bubbles up the hierarchy.
-    
-            Example Scenario: If a link within a paragraph is clicked ('a' element), the click event is initially registered on the 'a' element.
-    
-            Propagation Upward: After triggering any event listener on the 'a' element, the event then bubbles up to parent elements, such as the paragraph ('p' element), and continues upward.
-    
-            Reaching the Root: This process continues until it reaches higher-level elements, potentially up to the body element or the root of the document.
-    
-        Utility of Event Bubbling: Event bubbling is useful for handling events in complex HTML structures. It allows for a centralized approach to handling events without the need to assign individual listeners to each element.
-    
-            Efficient Event Listener Assignment: Rather than assigning multiple event listeners to each element, a single event listener can be assigned to a higher-level element, capturing events from all child elements.
-    
-            Example in our Application: In a table structure, instead of setting listeners for each table row, one can set a single listener on a higher-level container, like the table itself or a container with a specific ID (e.g., 'carttable'). 
-            
-            The container already has an id, carttable, so why not use that?
-            
-            */
-        // Implementation: 
-
-        // So what we are doing is we are calling getElementById of 'carttable', it's the div class container + id of 'carttable', and then we add an event listener. 
-
-        // That event listener listens for the click event and then calls removeItemFromCart. 
-
-        document.getElementById("carttable").addEventListener( // 1. calling getElementById of 'carttable', and then we add an event listener. 
-            'click', // 2. event listener listens for the click event...
-            removeItemFromCart // 3. ...and then calls removeItemFromCart.
+        document.getElementById("carttable").addEventListener(
+            'click',
+            removeItemFromCart
         );
 
-        // 4. Please note that this only makes sense if removeFromCart buttons are the only place where you are intending to work with click events. 
-
-        // Otherwise, the implementation might get a little bit more messy. 
-
         function removeItemFromCart(e) {
-
-            // 5. Now, in the removeItemFromCart function, basically, all we need to do is, once, again read out the 'data‑idx' attribute. 
-
-            // Remember, wherever we click in our table now, the event is either at the span element with the icon or at the button, and then bubbles up --> table cell --> table row --> table, and then at one point --> the container.
-
-            // So, once again, we have to have a look at e.target, and I'm implementing it a little bit differently this time. 
-
-            // 6. So I'm storing the DOM element where the click event originated in el, and then I have a close look at it to find out which row we need to remove. 
-
-            // So I start by setting the row to null, and then I have a specific look at the element. 
-
-            // So if the element is the button, so if the tagName property is BUTTON, then the row is el and then .parentNode.parentNode, twice up.
-            let el = e.target; // 7. storing the DOM element where the click event originated
-            let row = null; // 8. setting the row to null
-            if (el.tagName === "BUTTON") { // 9.  if the element/tagName property is the button...
-                row = el.parentNode.parentNode; // 10. ...then the row is el and then .parentNode.parentNode, twice up.
-
-                // 11. Otherwise, if the tagName is SPAN, and I mean there might be so many spans, so let's be a little bit more specific. 
-
-                //  We know that the span element contains the 'removeFromCart' icon, so let's look for that icon. 
-
-                // We assign that icon by applying a CSS class. 
-
-                // So we can have a look at the classList and then see whether it contains a certain entry, and the one here is this one 'bi-cart-x-fill' icon. 
-
-                // Basically, that's all there is. And if we have a span like this... 
+            let el = e.target;
+            let row = null;
+            if (el.tagName === "BUTTON") {
+                row = el.parentNode.parentNode;
             } else if (el.tagName === "SPAN" && el.classList.contains('bi-cart-x-fill')) {
-                row = el.parentNode.parentNode.parentNode; // 12. then row = el, three times up, so parentNode.parentNode.parentNode.
+                row = el.parentNode.parentNode.parentNode;
             }
-            if (row !== null) { // 13. and if row is not null, we can proceed as before
-                // 14.  we read out the data‑idx attribute and then we call removeFromCart.
+            if (row !== null) {
                 let idx = row.getAttribute("data-idx");
                 removeFromCart(idx);
 
-                /* Stop Bubbling up / propagation further up: 
-       
-                There is one more thing. Maybe if we handle the event, we don't want it to bubble even further up because there might be side effects. 
-                
-                So if we remove an item from the cart, we would like to stop the event from bubbling up. And this is how it works. 
-                */
-                
-                e.stopPropagation(); // 15. I just go to the event arguments and then call stopPropagation. 
-                
-                // 'StopPropagation' makes sure that the event doesn't bubble up further in the DOM hierarchy. 
-                
-                // However, if there are event listeners listening to the same event on the same level in the hierarchy, remember addEventListener means we can have multiple event listeners even for the same event, then those other event handling functions will still be run. 
-                
-                // If you even would like to avoid this, you can also do 'stopImmediatePropagation', but you never know which of those event listeners is run first, so usually 'stopPropagation' is what I recommend. 
+                e.stopPropagation();
             }
-            /* output: 
-            
-            It removes the row as before.
-            
-            */
-
-            /* Final comment - event capturing: 
-            
-            For the sake of completeness, I want to mention that there is also an event, let's say, hierarchical movement mechanism, that goes into the opposite direction when compared to event bubbling. It's called event capturing. 
-            
-            So, once again, we click on the link, but the event needs to find its way through the structure. 
-            
-            So it starts at the top and goes to the body element, down to the paragraph, and finally, down to the 'a' element where the user was clicking. 
-            
-            There's also a way to handle those events during that capturing phase. 
-            
-            However, most of the time, event bubbling is what you would like to use because you click on something and then the outer container might be relevant, usually not the other way around. 
-            
-            And that's why, by default, the addEventListener method uses event bubbling and not event capturing.
-            
-            */
         }
 
         function removeFromCart(idx) {
