@@ -18,11 +18,15 @@
             document.querySelector("footer div").classList.remove("font-xxlarge");
             document.querySelector("footer div").classList.add("font-large");
 
-            let btn = document.querySelector("button");
-            btn.addEventListener(
-                "click",
-                addToCart,
-                { once: true });
+            let btn = document.querySelectorAll("button");
+            console.log(btn);
+
+            btn.forEach(i => {
+                i.addEventListener(
+                    "click",
+                    addToCart
+                );
+            });
 
             function getCartItemCount() {
                 let spanTickets = document.getElementById("spanTickets");
