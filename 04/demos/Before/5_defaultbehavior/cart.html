@@ -24,10 +24,6 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <!-- 2.2. link to the shopping cart page 
-                                
-                            If we click somewhere on or inside that link, the default behavior is that that link is loaded, no matter whether we wire up some event handlers or not.
-                            -->
                             <a href="./cart.html" class="nav-link">
                                 <span class="bi bi-cart-plus-fill text-white font-xxlarge"></span>
                                 <span class="font-upper font-bold text-white ms-4">
@@ -164,18 +160,7 @@
             </div>
         </footer>
     </div>
-    <script>
-        /* Preventing Default Behavior: 
-        
-        In JavaScript, the event.preventDefault() method is a powerful tool for controlling browser behaviors associated with various events. This method, when invoked on an event object, instructs the browser not to perform the default action associated with that event. This is particularly useful in scenarios like:
-
-            1. Form Submission: Normally, when you click a submit button in a form, the default behavior is to send the form data to a server. Using event.preventDefault(), you can stop this automatic submission, allowing you to, for instance, validate the form data with JavaScript before deciding whether to submit it.
-
-            2. Link Navigation: Clicking a link (2.2 above) typically navigates the browser to a new URL. However, if you want to perform a different action when the link is clicked (like opening a modal or fetching data without leaving the page), event.preventDefault() can be used to prevent the normal navigation behavior.
-
-        This method is commonly used in modern web applications to create dynamic, user-interactive experiences without relying on the standard behaviors of HTML elemen
-        
-        */
+    <script>        
         document.getElementById("carttable").addEventListener(
             "click",
             removeItemFromCart
