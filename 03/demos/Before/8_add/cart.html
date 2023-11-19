@@ -221,7 +221,23 @@
         placeholder.appendChild(a); // 9. the placeholder receives a new child, and that's the link we have just created
 
 
+        /* output: 
+        
+        Back in the browser, refresh the page, have a look at the footer at the bottom, there we go. And now we do have a link in the footer, and if we have a look in the browser DevTools, we will certainly see that now the div element has a couple of child nodes. So we have the copyrights character, we have the placeholder with the year, we have the blank. 
+        
+        The blank isn't shown here specifically as a text node because there is just a blank in it, where in the parsing it is not considered specifically a text node because then all of the indentations would have to be shown as text nodes here, but technically, yes, there is a text node, and we can actually prove that by doing document.querySelector, and then we just go to footer and div, and then we have a look at the child nodes, and you see, indeed, the length of the childNodes is 4, so, yes, we have 4 child nodes. 
 
+            browser console we type:
+
+                document.querySelector('footer div').childNodes // NodeList(4) [text, span#copyright-year, text, a]
+
+                or
+                
+                document.querySelector('footer div').childNodes.length // 4
+        
+        So the display here might be a bit confusing. It's the first child node is the copyright character, the second one is the span element, the third one, that blank we specifically created, and the fourth one is our new link, so we can now add arbitrary DOM elements to our pages. 
+        
+        */
 
         function removeFromCart(idx) {
             let items = document.querySelectorAll("#carttable table tbody tr");
