@@ -209,6 +209,20 @@
         placeholder.lastChild.remove(); // 1. querySelector as method of the document object, we access footer div, then we access the lastChild, and then we remove it. 
 
         let blank = document.createTextNode(' '); // 2. because there's a space character in front of Globoticket, and that should not be part of the link, we create blank a space character
+        placeholder.appendChild(blank); // 4. now we can add that new text node as a new child to our placeholder
+
+        // 5. create a new link
+        let a = document.createElement('a');
+        a.setAttribute('href', './index.js'); // 6. set the href attribute for the link target 'index.js', but could be anything else like url, etc.
+        // 7. then I either create a new text node and append it, or I set the textContent property. Let's just create a new text node.
+        let a_text = document.createTextNode('Globoticket');
+
+        a.appendChild(a_text); // 8. append this text node as a child to our new link
+        placeholder.appendChild(a); // 9. the placeholder receives a new child, and that's the link we have just created
+
+
+
+
         function removeFromCart(idx) {
             let items = document.querySelectorAll("#carttable table tbody tr");
             if (idx < items.length) {
