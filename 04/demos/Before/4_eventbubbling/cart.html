@@ -161,6 +161,27 @@
         </footer>
     </div>
     <script>
+    /* Event bubbling first thoughts: 
+        
+    HTML Hierarchy and Event Handling: In HTML, the hierarchical structure is crucial for event handling. This is because events in the browser default to a process called event bubbling.
+
+    Event Bubbling Explained: When an event occurs, it starts at the most specific element (the one directly interacted with) and then bubbles up the hierarchy.
+
+        Example Scenario: If a link within a paragraph is clicked ('a' element), the click event is initially registered on the 'a' element.
+
+        Propagation Upward: After triggering any event listener on the 'a' element, the event then bubbles up to parent elements, such as the paragraph ('p' element), and continues upward.
+
+        Reaching the Root: This process continues until it reaches higher-level elements, potentially up to the body element or the root of the document.
+
+    Utility of Event Bubbling: Event bubbling is useful for handling events in complex HTML structures. It allows for a centralized approach to handling events without the need to assign individual listeners to each element.
+
+        Efficient Event Listener Assignment: Rather than assigning multiple event listeners to each element, a single event listener can be assigned to a higher-level element, capturing events from all child elements.
+        
+        Example in our Application: In a table structure, instead of setting listeners for each table row, one can set a single listener on a higher-level container, like the table itself or a container with a specific ID (e.g., 'carttable'). 
+        
+        The container already has an id, carttable, so why not use that?
+        
+        */
         [...document.getElementsByTagName("button")].forEach(
             button => button.addEventListener("click", removeItemFromCart)
         );
