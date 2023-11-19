@@ -176,40 +176,19 @@
         </footer>
     </div>
     <script>
-        /* Events API Overview: 
-        
-        Let's have a look. I have created a very simple function, addToCart, which basically increases the number next to the shopping cart in the header of the page by one. And I like to call this whenever the 'add to cart' button is clicked. 
-        
-        There are two ways how I can do this using the Netscape‑inspired API
-        
-        */
-        // The other option would be that I'm setting the onClick property. 
-
         document.querySelector("footer div").childNodes[1].textContent =
             new Date().getFullYear();
         document.querySelector("footer div").classList.remove("font-xxlarge");
         document.querySelector("footer div").classList.add("font-large");
 
-        // So how about we start by selecting the first button, and I'm just looking for a button element. I have five button elements on the page, at least currently. 
-        let btn = document.querySelector('button'); // The querySelector only returns the first one, so I will be using that. 
-
-        // And then I could use that btn and set its onclick property to addToCart. 
-        btn.onclick = addToCart; // And this time I'm setting a property, so I cannot run code here, or should not run code here, instead, I just reference or point to that function, so that would work as well.
-
+        let btn = document.querySelector('button');
+        btn.onclick = addToCart;
+        
         function addToCart() {
             let spanTickets = document.getElementById("spanTickets");
             let count = parseInt(spanTickets.textContent) ?? 0;
             spanTickets.textContent = count + 1;
         }
-
-        /* output: 
-        
-        I hit the ADD TO CART button, and every time I do, the code runs and I increase the number of tickets in my shopping cart
-
-        obs.: only the first 'add to cart' button is working, If I click the ADD TO CART button for other items they are not added to cart.
-        
-        */
-
     </script>
 </body>
 
