@@ -161,22 +161,10 @@
         </footer>
     </div>
     <script>
-        // Using CSS classes could be a better option and we could set the CSS classes, as well the setAttribute, so we could set the class property or the class attribute, but it's getting a little bit better with the classList property, because the classList property exposes an API to manage the list of classes assigned to that very element. 
-        
-        //Among other things, we have the add method to assign a class to an element, and we add it so if there are other classes already applied to that element, they remain intact. Add just adds one extra class to the list of classes. 
-        
-        // You can also remove a class with the remove method; you have toggle to switch a class on and off, so to speak; and you can also replace the existing classes with a new class, and that's a little bit better than just going via the attribute, because then you have to parse the list of classes yourself, the classes property does it for you.
-
         document.querySelector("footer div").childNodes[1].textContent = 
             new Date().getFullYear();
-        document.querySelector("footer div").classList.remove("font-xxlarge"); //  access the classList and then remove font‑xxlarge. That works well, however, in the next step, I would also like to add another class, I've prepared one, font‑large, so that the font is a little bit large, but not extra, extra large. Remove, however, returns void, so it's not chainable, therefore, I can't change several things at once removing and adding, therefore...
-        document.querySelector("footer div").classList.add("font-large"); // I need to do copy/paste, call add, and then use font‑large here. I remove one class and add another.
-
-        /* output: 
-        
-        Note the font size of the copyright line, and then I reload because we've saved our changes, and font size now is smaller, courtesy of JavaScript code.
-        
-        */
+        document.querySelector("footer div").classList.remove("font-xxlarge");
+        document.querySelector("footer div").classList.add("font-large"); 
     </script>
   </body>
 </html>
