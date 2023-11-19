@@ -28,10 +28,6 @@
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <!-- 2.2. link to the shopping cart page 
-
-                            If we click somewhere on or inside that link, the default behavior is that that link is loaded, no matter whether we wire up some event handlers or not.
-                            -->
                             <a href="./cart.html" class="nav-link">
                                 <span class="bi bi-cart-plus-fill text-white font-xxlarge"></span>
                                 <span class="font-upper font-bold text-white ms-4">
@@ -185,92 +181,27 @@
         document.querySelector("footer div").classList.remove("font-xxlarge");
         document.querySelector("footer div").classList.add("font-large");
 
-
         let btn = document.querySelector("button");
         btn.addEventListener(
             "click",
             addToCart,
             { once: true });
 
-        /* Preventing Default Behavior: 
-   
-   In JavaScript, the event.preventDefault() method is a powerful tool for controlling browser behaviors associated with various events. This method, when invoked on an event object, instructs the browser not to perform the default action associated with that event. This is particularly useful in scenarios like:
-
-       1. Form Submission: Normally, when you click a submit button in a form, the default behavior is to send the form data to a server. Using event.preventDefault(), you can stop this automatic submission, allowing you to, for instance, validate the form data with JavaScript before deciding whether to submit it.
-
-       2. Link Navigation: Clicking a link (2.2 above) typically navigates the browser to a new URL. However, if you want to perform a different action when the link is clicked (like opening a modal or fetching data without leaving the page), event.preventDefault() can be used to prevent the normal navigation behavior.
-
-   This method is commonly used in modern web applications to create dynamic, user-interactive experiences without relying on the standard behaviors of HTML elemen
-   
-   */
-        /* In our application: 
-
-        I would like to prevent certain default behaviors of the browser. Let me explain what I mean with that. Typical examples for such default behaviors are buttons, or to be precise, submit buttons within an HTML form. 
-
-         The default behavior of such a button is that the form is submitted, or if we have links, for instance, that link to the shopping cart page (2.2 above), if we click somewhere on or inside that link, the default behavior is that that link is loaded, no matter whether we wire up some event handlers or not. 
-         
-         Let me demonstrate that. 
-         
-         For instance, we could say WE DO NOT ALLOW GOINT TO THE SHOPPING CART PAGE if there are no items within the shopping cart. In order to do that, let me write a helper function first. 
-         
-         1. So how about getCartItemCount
-         2. return 
-         3. and then let count = getCartItem count, because I need that now as well, that's the idea. 
-         
-        */
-
-        function getCartItemCount() { // 1. new function 
+        function getCartItemCount() {
             let spanTickets = document.getElementById("spanTickets");
-            return parseInt(spanTickets.textContent) ?? 0; // 2. return 
+            return parseInt(spanTickets.textContent) ?? 0;
         }
-        /*
-        So I'd like to add an event listener to our link to the cart page. How could we do this? 
-         
-        4. For instance, by calling document.querySelector, 
-        
-        5. and then my selector could be something like this, all a elements where the href attribute is set to ./cart.html. That's what we have in the HTML markup. 
-         
-        6. And once we have that element, we can do addEventListener, the event name, once again, is click, and... 
-         
-        7. ...I'll use an anonymous inline handler function here. 
 
-        8. And I first get the count, so let count = getCartItemCount. 
-         
-        9. And then if the count is 0, 
-        
-        10. I'm opening up a model warning box and saying, no, the cart is empty.
-        
-        */
-        document.querySelector("a[href='./cart.html']").addEventListener("click", (e) => { // 4, 5, 6 and 7
-            let count = getCartItemCount(); // 8
-            if (count === 0) { // 9
-                alert('Cart is empty!') // 10
-                e.preventDefault() // 11
+        document.querySelector("a[href='./cart.html']").addEventListener("click", (e) => {
+            let count = getCartItemCount();
+            if (count === 0) { 
+                alert('Cart is empty!');
+                e.preventDefault();
             }
         });
 
-        /* output: 
-        
-        If at this point we click the cart button (to go to the cart.html page), it will show the alert box. But once we click OK in the alert box, it will redirect us to the cart.html page.
-
-        Why? Because a link has that default behavior. 
-        
-        But in that specific case, maybe I just don't want that default behavior. What can we do about that? 
-        
-        Well, in that specific case, if there are no items in a shopping cart, I would like to prevent the default behavior of that link, and that's exactly what I'm writing here in JavaScript now. 
-        
-        11. I'm using the event arguments and then call preventDefault. The name of the method says it all, prevent the default behavior. 
-        
-        */
-
-        /* output: 
-        
-        Still the shopping cart is empty. I click on that icon, yes, cart is empty. I hit OK, and nothing happens, so I am not redirected back to the shopping cart because I have prevented the default behavior of the hyperlink.
-        
-        */
-
         function addToCart() {
-            let count = getCartItemCount(); // 3. and then let count = getCartItem count, because I need that now as well, that's the idea. 
+            let count = getCartItemCount();
             spanTickets.textContent = count + 1;
         }
     </script>
