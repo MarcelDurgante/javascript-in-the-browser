@@ -176,68 +176,23 @@
         </footer>
     </div>
     <script>
-        /* Adding DOM elements explanation: 
-        
-        To add new elements to the DOM in web development, the following steps are typically followed:
-
-            Creating Elements: The process starts with creating a new element using document.createElement. This method requires the tag name (e.g., 'p' for a paragraph) and creates an element in memory without rendering it on the page.
-
-            Creating Text Nodes: For text content, document.createTextNode is used to create text nodes. These nodes can then be appended to other elements, such as paragraph elements.
-
-            Appending Child Nodes: The appendChild method is used to add a new node as a child to an existing node. For instance, a text node can be appended to a paragraph node to form a complete element with text.
-
-            Inserting into the DOM: Finally, to render the element on the page, it is appended to an existing element in the DOM. This is typically done using the appendChild method on a parent element, often referred to as a placeholder.
-
-            Additional Methods: There are also helper methods like after and before for more complex DOM manipulations, but appendChild is the most commonly used method for adding elements.
-
-            e.g:
-
-            let el - document.getElementById('...'); // Access placeholder
-            el.innerHTML = '<span> some text </span>'; // Create markup, write to page
-            let new_p = document.createElement('p'); // Create new element
-            let new_p_text = document.createTextNode('New text node'); // Create text node
-            new_p.appendChild(new_p_text); // Append text node to new element
-            el.appendChild(new_p); // Append new element to placeholder on page
-
-        */
-        // 3. Since I'm using the "footer div" element a couple of times, I'll put this in a variable and call it placeholder, and we can use that actually everywhere 
         let placeholder = document.querySelector('footer div');
 
         placeholder.childNodes[1].textContent =
             new Date().getFullYear();
-        // In our footer, we have the copyright notice and we also have Globoticket, the brand name. This could be turned into a link. Let's remove the Globoticket text node, and then we add a link in its place. To access the Globoticket text node, remember that the element here has three child nodes, the copyright character, then the span element, and then Globoticket with a blank.
-        placeholder.lastChild.remove(); // 1. querySelector as method of the document object, we access footer div, then we access the lastChild, and then we remove it. 
+        
+        placeholder.lastChild.remove();  
 
-        let blank = document.createTextNode(' '); // 2. because there's a space character in front of Globoticket, and that should not be part of the link, we create blank a space character
-        placeholder.appendChild(blank); // 4. now we can add that new text node as a new child to our placeholder
+        let blank = document.createTextNode(' '); 
+        placeholder.appendChild(blank);
 
-        // 5. create a new link
         let a = document.createElement('a');
-        a.setAttribute('href', './index.js'); // 6. set the href attribute for the link target 'index.js', but could be anything else like url, etc.
-        // 7. then I either create a new text node and append it, or I set the textContent property. Let's just create a new text node.
+        a.setAttribute('href', './index.js'); 
+
         let a_text = document.createTextNode('Globoticket');
+        a.appendChild(a_text); 
 
-        a.appendChild(a_text); // 8. append this text node as a child to our new link
-        placeholder.appendChild(a); // 9. the placeholder receives a new child, and that's the link we have just created
-
-
-        /* output: 
-        
-        Back in the browser, refresh the page, have a look at the footer at the bottom, there we go. And now we do have a link in the footer, and if we have a look in the browser DevTools, we will certainly see that now the div element has a couple of child nodes. So we have the copyrights character, we have the placeholder with the year, we have the blank. 
-        
-        The blank isn't shown here specifically as a text node because there is just a blank in it, where in the parsing it is not considered specifically a text node because then all of the indentations would have to be shown as text nodes here, but technically, yes, there is a text node, and we can actually prove that by doing document.querySelector, and then we just go to footer and div, and then we have a look at the child nodes, and you see, indeed, the length of the childNodes is 4, so, yes, we have 4 child nodes. 
-
-            browser console we type:
-
-                document.querySelector('footer div').childNodes // NodeList(4) [text, span#copyright-year, text, a]
-
-                or
-                
-                document.querySelector('footer div').childNodes.length // 4
-        
-        So the display here might be a bit confusing. It's the first child node is the copyright character, the second one is the span element, the third one, that blank we specifically created, and the fourth one is our new link, so we can now add arbitrary DOM elements to our pages. 
-        
-        */
+        placeholder.appendChild(a); 
 
         function removeFromCart(idx) {
             let items = document.querySelectorAll("#carttable table tbody tr");
