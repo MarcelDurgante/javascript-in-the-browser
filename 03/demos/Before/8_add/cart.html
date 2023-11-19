@@ -177,12 +177,12 @@
 
             e.g:
 
-            let el - document.getElementById('...');
-            el.innerHTML = '<span> some text </span>';
-            let new_p = document.createElement('p');
-            let new_p_text = document.createTextNode('New text node');
-            new_p.appendChild(new_p_text);
-            el.appendChild(new_p);
+            let el - document.getElementById('...'); // Access placeholder
+            el.innerHTML = '<span> some text </span>'; // Create markup, write to page
+            let new_p = document.createElement('p'); // Create new element
+            let new_p_text = document.createTextNode('New text node'); // Create text node
+            new_p.appendChild(new_p_text); // Append text node to new element
+            el.appendChild(new_p); // Append new element to placeholder on page
 
         */
         document.querySelector("footer div").childNodes[1].textContent = 
