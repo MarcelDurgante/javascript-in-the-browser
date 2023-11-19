@@ -161,6 +161,17 @@
         </footer>
     </div>
     <script>
+        /* Preventing Default Behavior: 
+        
+        In JavaScript, the event.preventDefault() method is a powerful tool for controlling browser behaviors associated with various events. This method, when invoked on an event object, instructs the browser not to perform the default action associated with that event. This is particularly useful in scenarios like:
+
+            1. Form Submission: Normally, when you click a submit button in a form, the default behavior is to send the form data to a server. Using event.preventDefault(), you can stop this automatic submission, allowing you to, for instance, validate the form data with JavaScript before deciding whether to submit it.
+
+            2. Link Navigation: Clicking a link typically navigates the browser to a new URL. However, if you want to perform a different action when the link is clicked (like opening a modal or fetching data without leaving the page), event.preventDefault() can be used to prevent the normal navigation behavior.
+
+        This method is commonly used in modern web applications to create dynamic, user-interactive experiences without relying on the standard behaviors of HTML elemen
+        
+        */
         document.getElementById("carttable").addEventListener(
             "click",
             removeItemFromCart
