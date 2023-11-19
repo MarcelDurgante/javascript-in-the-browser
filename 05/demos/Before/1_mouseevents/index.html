@@ -77,6 +77,25 @@
                 "mouseleave",
                 (e) => e.target.classList.remove("cart-highlight")
             );
+
+            /* Mouse Events Arguments: 
+            
+            Mouse events in web programming involve various arguments that provide information about the user's interaction with a pointing device like a mouse. These arguments include:
+
+                1.clientX and clientY: These provide the X and Y coordinates of the mouse pointer relative to the viewport, not changing with scrolling.
+
+                2. pageX and pageY: They give the X and Y coordinates of the mouse pointer relative to the entire document, differing from clientX/Y when scrolling.
+
+                3. screenX and screenY: These coordinates are relative to the entire screen.
+
+                4. offsetX and offsetY: These are the X and Y coordinates relative to the target DOM element, useful for determining where on an element a click occurred.
+
+                5. button and buttons: The button property indicates which mouse button was pressed (0 for the main button, 2 for the secondary, and 1 for the middle button). The buttons property can indicate combinations of buttons pressed simultaneously.
+                
+                Modifier Keys: Properties like ctrlKey, altKey, and shiftKey indicate if these keys were pressed during the mouse event, which can be essential for specific interactions, like opening links in new tabs with the Ctrl key.
+            These arguments are crucial for detailed and responsive user interface interactions in web applications.
+            
+            */
         });
     </script>
 </head>
