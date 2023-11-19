@@ -246,6 +246,21 @@
                 // 14.  we read out the data‑idx attribute and then we call removeFromCart.
                 let idx = row.getAttribute("data-idx");
                 removeFromCart(idx);
+
+                /* Stop Bubbling up / propagation further up: 
+       
+                There is one more thing. Maybe if we handle the event, we don't want it to bubble even further up because there might be side effects. 
+                
+                So if we remove an item from the cart, we would like to stop the event from bubbling up. And this is how it works. 
+                */
+                
+                e.stopPropagation(); // 15. I just go to the event arguments and then call stopPropagation. 
+                
+                // 'StopPropagation' makes sure that the event doesn't bubble up further in the DOM hierarchy. 
+                
+                // However, if there are event listeners listening to the same event on the same level in the hierarchy, remember addEventListener means we can have multiple event listeners even for the same event, then those other event handling functions will still be run. 
+                
+                // If you even would like to avoid this, you can also do 'stopImmediatePropagation', but you never know which of those event listeners is run first, so usually 'stopPropagation' is what I recommend. 
             }
             /* output: 
             
