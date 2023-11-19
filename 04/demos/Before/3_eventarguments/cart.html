@@ -219,14 +219,16 @@
 
         // However, there's a catch. I can't forEach over the data returned by getElementsByTagName, but using the spread operator, I can do that. 
         // So I iterate over all of the buttons
-        [...document.getElementsByTagName('button)')].forEach(
+        [...document.getElementsByTagName('button')].forEach(
             // 2. and for each button, I just do a button.addEventListener, and the event handling code is in the function, removeItemFromCart
-            button => button.addEventListener('cllick', removeItemFromCart));
+            button => button.addEventListener('click', removeItemFromCart));
 
         function removeItemFromCart(e) {
             // 3.  since this is an event handling function, it automatically receives event arguments "e". And then I try to access the table row with "e.target", because 'target' gives us the element where the event was triggered.
             //So if I clicked on the button, that's the button. And in case it's the button, ".parentNode" --> is the table cell and ".parentNode" again --> is the table row.
             let row = e.target.parentNode.parentNode;
+            console.log(row);
+
             // 4.  If I clicked on the icon, however, that's not the table row, it's the table cell, so I have to go up once more. 
 
             // So I take a look at the 'tagName' property. 
@@ -248,8 +250,9 @@
 
         //  So how about this? 
         function removeFromCart(idx) {
+            console.log(idx);
             // 1. We use querySelector instead of querySelectorAll because we are just reading out one item
-            let item = document.querySelector(`#carttable table tbody tr[data-${idx}]`); // 2. and in order to do that, I am changing the selector a little bit. So I am not interested in just all of the table rows, but just in those table rows or in that table row, to be exact, where data‑idx has a value of, well, and that's what's in the idx variable
+            let item = document.querySelector(`#carttable table tbody tr[data-idx='${idx}']`); // 2. and in order to do that, I am changing the selector a little bit. So I am not interested in just all of the table rows, but just in those table rows or in that table row, to be exact, where data‑idx has a value of, well, and that's what's in the idx variable
             if (item) { // 3. And then if that item exists
                 item.remove(); // then I remove it
             }
