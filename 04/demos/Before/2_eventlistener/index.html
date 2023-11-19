@@ -199,6 +199,12 @@
             let spanTickets = document.getElementById("spanTickets");
             let count = parseInt(spanTickets.textContent) ?? 0;
             spanTickets.textContent = count + 1;
+
+            // one thing we can do when adding event listeners like this, we can also remove them later. If you have several event listeners, we can remove individual ones. However, that does not work easily with anonymous functions, but if we have a name function like here, we could do it. I show you a very simple implementation that only makes sense if there's only one place where you're using this function. For the sake of simplicity, I think this approach is viable here. It will not be viable if you are using the addToCart function on several places on the page, which you would usually do. So we can also do a removeEventListener, and this method also expects the name of the event and then the listener. 
+
+            btn.removeEventListener("click", addToCart);
+
+            // output: So I hit the button once, and we now have one ticket in our shopping cart, and I hit it again, and nothing happens. Why? Because we removed the event listener.
         }
     </script>
   </body>
