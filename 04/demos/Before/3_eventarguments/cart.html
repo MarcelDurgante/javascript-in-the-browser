@@ -227,6 +227,19 @@
             // 3.  since this is an event handling function, it automatically receives event arguments "e". And then I try to access the table row with "e.target", because 'target' gives us the element where the event was triggered.
             //So if I clicked on the button, that's the button. And in case it's the button, ".parentNode" --> is the table cell and ".parentNode" again --> is the table row.
             let row = e.target.parentNode.parentNode;
+            // 4.  If I clicked on the icon, however, that's not the table row, it's the table cell, so I have to go up once more. 
+
+            // So I take a look at the 'tagName' property. 
+
+            //The tagName property of a DOM element is the HTML tag name in all uppercase. So if that's not TR, if I'm not in a table row...
+            if (row.tagName !== 'TR') {
+                // 5. then I just say row = row.parentNode, going up once again
+                row = row.parentNode;
+            }
+            // 6. and now I can read out the data‑idx attribute, 
+            let idx = row.getAttribute('data-idx');
+            // 7. call removeFromCart that index.
+            removeFromCart(idx);
         }
 
         function removeFromCart(idx) {
