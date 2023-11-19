@@ -161,6 +161,30 @@
         </footer>
     </div>
     <script>
+        /* Adding DOM elements explanation: 
+        
+        To add new elements to the DOM in web development, the following steps are typically followed:
+
+            Creating Elements: The process starts with creating a new element using document.createElement. This method requires the tag name (e.g., 'p' for a paragraph) and creates an element in memory without rendering it on the page.
+
+            Creating Text Nodes: For text content, document.createTextNode is used to create text nodes. These nodes can then be appended to other elements, such as paragraph elements.
+
+            Appending Child Nodes: The appendChild method is used to add a new node as a child to an existing node. For instance, a text node can be appended to a paragraph node to form a complete element with text.
+
+            Inserting into the DOM: Finally, to render the element on the page, it is appended to an existing element in the DOM. This is typically done using the appendChild method on a parent element, often referred to as a placeholder.
+
+            Additional Methods: There are also helper methods like after and before for more complex DOM manipulations, but appendChild is the most commonly used method for adding elements.
+
+            e.g:
+
+            let el - document.getElementById('...');
+            el.innerHTML = '<span> some text </span>';
+            let new_p = document.createElement('p');
+            let new_p_text = document.createTextNode('New text node');
+            new_p.appendChild(new_p_text);
+            el.appendChild(new_p);
+
+        */
         document.querySelector("footer div").childNodes[1].textContent = 
             new Date().getFullYear();
 
