@@ -200,30 +200,30 @@
         // Implementation: 
 
         // So what we are doing is we are calling getElementById of 'carttable', it's the div class container + id of 'carttable', and then we add an event listener. 
-        
+
         // That event listener listens for the click event and then calls removeItemFromCart. 
-        
+
         document.getElementById("carttable").addEventListener( // 1. calling getElementById of 'carttable', and then we add an event listener. 
             'click', // 2. event listener listens for the click event...
             removeItemFromCart // 3. ...and then calls removeItemFromCart.
         );
- 
+
         // 4. Please note that this only makes sense if removeFromCart buttons are the only place where you are intending to work with click events. 
-        
+
         // Otherwise, the implementation might get a little bit more messy. 
 
         function removeItemFromCart(e) {
 
             // 5. Now, in the removeItemFromCart function, basically, all we need to do is, once, again read out the 'data‑idx' attribute. 
-            
+
             // Remember, wherever we click in our table now, the event is either at the span element with the icon or at the button, and then bubbles up --> table cell --> table row --> table, and then at one point --> the container.
-            
+
             // So, once again, we have to have a look at e.target, and I'm implementing it a little bit differently this time. 
 
             // 6. So I'm storing the DOM element where the click event originated in el, and then I have a close look at it to find out which row we need to remove. 
-            
+
             // So I start by setting the row to null, and then I have a specific look at the element. 
-            
+
             // So if the element is the button, so if the tagName property is BUTTON, then the row is el and then .parentNode.parentNode, twice up.
             let el = e.target; // 7. storing the DOM element where the click event originated
             let row = null; // 8. setting the row to null
@@ -231,20 +231,22 @@
                 row = el.parentNode.parentNode; // 10. ...then the row is el and then .parentNode.parentNode, twice up.
 
                 // 11. Otherwise, if the tagName is SPAN, and I mean there might be so many spans, so let's be a little bit more specific. 
-                
+
                 //  We know that the span element contains the 'removeFromCart' icon, so let's look for that icon. 
-                
+
                 // We assign that icon by applying a CSS class. 
-                
+
                 // So we can have a look at the classList and then see whether it contains a certain entry, and the one here is this one 'bi-cart-x-fill' icon. 
-                
-                // Basically, that's all there is. And if we have a span like this, then row =, and then el, and then three times up, so parentNode.parentNode.parentNode.
+
+                // Basically, that's all there is. And if we have a span like this... 
             } else if (el.tagName === "SPAN" && el.classList.contains('bi-cart-x-fill')) {
-
-
+                row = el.parentNode.parentNode.parentNode; // 12. then row = el, three times up, so parentNode.parentNode.parentNode.
             }
-            let idx = row.getAttribute("data-idx");
-            removeFromCart(idx);
+            if (row !== null) { // 13. and if row is not null, we can proceed as before
+                // 14.  we read out the data‑idx attribute and then we call removeFromCart.
+                let idx = row.getAttribute("data-idx");
+                removeFromCart(idx);
+            }
         }
 
         function removeFromCart(idx) {
