@@ -267,6 +267,22 @@
             It removes the row as before.
             
             */
+
+            /* Final comment - event capturing: 
+            
+            For the sake of completeness, I want to mention that there is also an event, let's say, hierarchical movement mechanism, that goes into the opposite direction when compared to event bubbling. It's called event capturing. 
+            
+            So, once again, we click on the link, but the event needs to find its way through the structure. 
+            
+            So it starts at the top and goes to the body element, down to the paragraph, and finally, down to the 'a' element where the user was clicking. 
+            
+            There's also a way to handle those events during that capturing phase. 
+            
+            However, most of the time, event bubbling is what you would like to use because you click on something and then the outer container might be relevant, usually not the other way around. 
+            
+            And that's why, by default, the addEventListener method uses event bubbling and not event capturing.
+            
+            */
         }
 
         function removeFromCart(idx) {
