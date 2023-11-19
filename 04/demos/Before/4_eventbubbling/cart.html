@@ -219,9 +219,29 @@
             // Remember, wherever we click in our table now, the event is either at the span element with the icon or at the button, and then bubbles up --> table cell --> table row --> table, and then at one point --> the container.
             
             // So, once again, we have to have a look at e.target, and I'm implementing it a little bit differently this time. 
-            let row = e.target.parentNode.parentNode;
-            if (row.tagName !== "TR") {
-                row = row.parentNode;
+
+            // 6. So I'm storing the DOM element where the click event originated in el, and then I have a close look at it to find out which row we need to remove. 
+            
+            // So I start by setting the row to null, and then I have a specific look at the element. 
+            
+            // So if the element is the button, so if the tagName property is BUTTON, then the row is el and then .parentNode.parentNode, twice up.
+            let el = e.target; // 7. storing the DOM element where the click event originated
+            let row = null; // 8. setting the row to null
+            if (el.tagName === "BUTTON") { // 9.  if the element/tagName property is the button...
+                row = el.parentNode.parentNode; // 10. ...then the row is el and then .parentNode.parentNode, twice up.
+
+                // 11. Otherwise, if the tagName is SPAN, and I mean there might be so many spans, so let's be a little bit more specific. 
+                
+                //  We know that the span element contains the 'removeFromCart' icon, so let's look for that icon. 
+                
+                // We assign that icon by applying a CSS class. 
+                
+                // So we can have a look at the classList and then see whether it contains a certain entry, and the one here is this one 'bi-cart-x-fill' icon. 
+                
+                // Basically, that's all there is. And if we have a span like this, then row =, and then el, and then three times up, so parentNode.parentNode.parentNode.
+            } else if (el.tagName === "SPAN" && el.classList.contains('bi-cart-x-fill')) {
+
+
             }
             let idx = row.getAttribute("data-idx");
             removeFromCart(idx);
