@@ -203,10 +203,10 @@
         // 3. Since I'm using the "footer div" element a couple of times, I'll put this in a variable and call it placeholder, and we can use that actually everywhere 
         let placeholder = document.querySelector('footer div');
 
-        document.querySelector("footer div").childNodes[1].textContent =
+        placeholder.childNodes[1].textContent =
             new Date().getFullYear();
         // In our footer, we have the copyright notice and we also have Globoticket, the brand name. This could be turned into a link. Let's remove the Globoticket text node, and then we add a link in its place. To access the Globoticket text node, remember that the element here has three child nodes, the copyright character, then the span element, and then Globoticket with a blank.
-        document.querySelector("footer div").lastChild.remove(); // 1. querySelector as method of the document object, we access footer div, then we access the lastChild, and then we remove it. 
+        placeholder.lastChild.remove(); // 1. querySelector as method of the document object, we access footer div, then we access the lastChild, and then we remove it. 
 
         let blank = document.createTextNode(' '); // 2. because there's a space character in front of Globoticket, and that should not be part of the link, we create blank a space character
         function removeFromCart(idx) {
